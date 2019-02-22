@@ -96,7 +96,7 @@ function btnDeleteOnClick() {
                     window.location = $("#btnBack").attr("href");
 
                 }
-            })
+            });
         }
     });
 }
