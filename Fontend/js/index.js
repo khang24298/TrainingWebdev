@@ -9,10 +9,10 @@ function getContrastYIQ(hexcolor) {
     var r = parseInt(hexcolor.substr(1,2),16);
     var g = parseInt(hexcolor.substr(2,2),16);
     var b = parseInt(hexcolor.substr(4,2),16);
-    
+
     var o = Math.round(((parseInt(r) * 299) +
                         (parseInt(g) * 587) +
-                        (parseInt(b) * 114)) / 1000);
+                        (parseInt(b) * 114)) / 1000);	
 
     var fore = (o > 125) ? 'black' : 'white';
 
