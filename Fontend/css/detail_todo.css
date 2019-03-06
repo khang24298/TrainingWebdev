@@ -1,0 +1,10 @@
+#descText,
+#title {
+    padding: 5px;
+    border-radius: 5px;
+}
+#descText:hover,
+#title:hover {
+    background: #c6c6c6;
+    padding: 5px;
+}
