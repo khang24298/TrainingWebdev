@@ -71,7 +71,7 @@ function appendContent(data) {
  */
 function deleteTodoList(id) {
     $.ajax({
-        url:`http://todolist.api.webdevuit.com/todo-lists/${id}`,
+        url:`${restServer}todo-lists/${id}`,
         type: "DELETE",
         success: function(res) {
             alert("Xóa thành công!");
@@ -106,7 +106,7 @@ function setEditOrCreateSubmit(oldData = null) {
         let color =  $("#txtColor").val();
 
         // DEFAULT URL AND submitType refer to api create new todolist.
-        let url = "http://todolist.api.webdevuit.com/todo-lists";
+        let url = `${restServer}todo-lists`;
         let submitType = "POST";
 
         if(title !== "" && color !== "") {
@@ -122,7 +122,7 @@ function setEditOrCreateSubmit(oldData = null) {
                 oldData.title = title;
                 oldData.color = color;
                 // Set url for update todolist.
-                url = `http://todolist.api.webdevuit.com/todo-lists/${oldData.id}`;
+                url = `${restServer}todo-lists/${oldData.id}`;
                 submitType = "PATCH";
             }
 
@@ -157,7 +157,7 @@ function setShowEditFormEvent() {
 
         // Call Ajax: get todolist need to edit.
         $.ajax({
-            url: `http://todolist.api.webdevuit.com/todo-lists/${id}`,
+            url: `${restServer}todo-lists/${id}`,
             type: "GET",
             success: function(res) {
               
@@ -207,7 +207,7 @@ $(function() {
     // Load data and set event.
     $.ajax({
        
-        url: "http://todolist.api.webdevuit.com/todo-lists",
+        url: `${restServer}todo-lists`,
         type: "GET",
         success: function (res) {
 

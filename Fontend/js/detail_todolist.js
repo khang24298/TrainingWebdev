@@ -5,7 +5,7 @@ function doneEvent(todo) {
 
     // Call ajax update
     $.ajax({
-        url: `http://todolist.api.webdevuit.com//todos/${todo.id}`,
+        url: `${restServer}todos/${todo.id}`,
         type: "PUT",
         data: JSON.stringify(todo),
         contentType: "application/json",
@@ -68,11 +68,11 @@ function appendContent(data, title, listId) {
 }
 
 function callAjax(data, isCreate = true) {
-    let url = "http://todolist.api.webdevuit.com/todos";
+    let url = `${restServer}todos`;
     let type = "POST";
 
     if (isCreate == false) {
-        url = "http://todolist.api.webdevuit.com/todos";
+        url = `${restServer}todos`;
         type = "PUT";
     }
 
@@ -138,7 +138,7 @@ function setDeleteEvent() {
         let id = $(this).data().id;
         if (confirm("Bạn có chắc muốn xóa không?")) {
             $.ajax({
-                url: `http://todolist.api.webdevuit.com/todos/${id}`,
+                url: `${restServer}todos/${id}`,
                 type: "DELETE",
                 success: function () {
                     alert("Xóa thành công");
@@ -168,7 +168,7 @@ $(function () {
     setEventShowCreateForm(todoListId);
 
     $.ajax({
-        url: `http://todolist.api.webdevuit.com/todo-lists/${todoListId}/todos`,
+        url: `${restServer}todo-lists/${todoListId}/todos`,
         type: "GET",
         success: function (res) {
             // Render all todos.

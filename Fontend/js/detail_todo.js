@@ -1,3 +1,4 @@
+
 /** Event */
 function loadContent() {
 
@@ -7,7 +8,7 @@ function loadContent() {
     let listTitle = url.searchParams.get("listTitle");
 
     $.ajax({
-        url: `http://todolist.api.webdevuit.com/todos/${id}`,
+        url: `${restServer}todos/${id}`,
         type: "GET",
         success: function (res) {
 
@@ -59,7 +60,7 @@ function btnSaveOnClick() {
 
         // Submit change.
         $.ajax({
-            url: `http://todolist.api.webdevuit.com//todos/${todo.id}`,
+            url: `${restServer}/todos/${todo.id}`,
             type: "PUT",
             data: JSON.stringify(todo),
             contentType: "application/json",
@@ -89,7 +90,7 @@ function btnDeleteOnClick() {
             let todo = JSON.parse($("#divContent").data().old);
            
             $.ajax({
-                url: `http://todolist.api.webdevuit.com/todos/${todo.id}`,
+                url: `${restServer}todos/${todo.id}`,
                 type: "DELETE",
                 success: function () {
                     alert("Đã xóa!");
