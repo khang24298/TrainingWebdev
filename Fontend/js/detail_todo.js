@@ -1,6 +1,4 @@
 /** Event */
-
-
 function loadContent() {
 
     let currentURL = window.location.href;
@@ -24,13 +22,13 @@ function loadContent() {
     });
 }
 
-function eventEnableEdit() {
+function eventEnableEditContentWhenDbClick() {
 
     // Enable edit when double click title or description.
     $("#descText, #title").dblclick(function (e) {
         e.preventDefault();
 
-        $(this).attr("contenteditable", true);
+        $(this).attr("contenteditable", 'plaintext-only');
         $(this).css("background", "white");
         $(this).css("padding", "5px");
         $(this).css("border", "1px solid");
@@ -87,14 +85,15 @@ function btnDeleteOnClick() {
     $("#btnDelete").on("click", function (e) {
         e.preventDefault();
         if (confirm("Bạn có thật sự muốn xóa không?")) {
+            
             let todo = JSON.parse($("#divContent").data().old);
+           
             $.ajax({
                 url: `http://todolist.api.webdevuit.com/todos/${todo.id}`,
                 type: "DELETE",
                 success: function () {
                     alert("Đã xóa!");
                     window.location = $("#btnBack").attr("href");
-
                 }
             });
         }
@@ -104,7 +103,7 @@ function btnDeleteOnClick() {
 // Init Event.
 $(function () {
     loadContent();
-    eventEnableEdit();
+    eventEnableEditContentWhenDbClick();
     btnSaveOnClick();
     btnCancelOnClick();
     btnDeleteOnClick();

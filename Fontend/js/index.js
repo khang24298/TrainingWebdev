@@ -24,20 +24,39 @@ function getContrastYIQ(hexcolor) {
  * @param  {Array} data Array todolist Object.
  */
 function appendContent(data) {
+    if(data.length <= 0) {
+        $(".content").append("Không có dữ liệu nào để hiển thị");
+        return;
+    }
     data.map(item => {
         let color = getContrastYIQ(item.color? item.color: "#ffffff");
         let content =
-            `<div class="item border p-2 my-1 text-white" style="background: ${item.color? item.color: "#ffffff"}">
-                <div class="action clearfix">
-                    <div class="title float-left">
-                        <a href="./detail_todolist.html?id=${item.id}&title=${item.title}" class="nav-link" style="color:${color}">${item.title}</a>
+            `<div class="item border shadow p-2 my-3 text-white rounded" 
+                style="background: ${item.color? item.color: "#ffffff"};">
+                <div class="action clearfix show-detail">
+                    <div class="title float-left" >
+                        <a href="./detail_todolist.html?id=${item.id}&title=${item.title}" 
+                            class="nav-link" style="color:${color}">
+                            ${item.title}
+                        </a>
                     </div>
-                    <a href="#" data-id="${item.id}" class="btn btn-success btn-sm float-right ml-2 btn-edit">
-                        <i class="fas fa-pen"></i>
-                    </a>
-                    <a href="#" data-id="${item.id}" class="btn btn-danger btn-sm float-right btn-delete">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
+                    <div class="dropdown  float-right" style="margin: 10px;">
+                        <spanid="dropdownMenuButton"
+                            style="color:${color}; cursor: pointer;" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                        </span>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                            <a href="#" data-id="${item.id}" class="dropdown-item btn-edit">
+                                Chỉnh sửa
+                            </a>
+                            <a href="#" data-id="${item.id}" class="dropdown-item btn-delete">
+                               Xóa
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>`;
 
@@ -199,10 +218,12 @@ $(function() {
             setDeleteEvent();
 
             // Set event for each button edit todolist.
-            setShowEditFormEvent();
+            setShowEditFormEvent();        
         },
         error: function (mess) {
             alert("ERROR " + mess);
         }
     });
+
+    
 })

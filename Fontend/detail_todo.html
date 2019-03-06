@@ -11,52 +11,47 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
-    <style>
-        #descText,
-        #title {
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        #descText:hover,
-        #title:hover {
-            background: #c6c6c6;
-            padding: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/detail_todo.css">
 </head>
 
 <body>
     <div class="wrapper">
         <!-- ### Navigate #### -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="./index.html">TODOLIST</a>
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <a href="./index.html" class="nav-link" id="btnBack">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </ul>
         </nav>
         <!-- ### Main content #### -->
-        <div class="main-content">
+        <div class="main-content mt-3">
             <div class="container p-2">
                 <!-- Content -->
                 <div class="content" id="divContent">
                     <!--Append content here-->
-                    <h1 id="title"></h1>
-                    <a href="#" class="btn btn-sm btn-outline-secondary" id="btnBack">
-                        Quay lại
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-danger btn-delete" id="btnDelete">
-                        Xóa
-                    </a>
+                    <div class="header">
+                        <b id="title"></b> <br>
+                        <a href="#" 
+                           class="badge badge-danger btn-delete" 
+                           id="btnDelete" title="Xóa công việc này">
+                           Xóa
+                        </a>
+                    </div>
                     <hr>
                     <p id="descText">
                         <!-- Append content here -->
                     </p>
 
-                    <button class="btn btn-success d-none" id="btnSave">Save</button>
-                    <button class="btn btn-danger d-none" id="btnCancel">Cancel</button>
+                    <button class="btn btn-success btn-sm d-none" id="btnSave">Save</button>
+                    <button class="btn btn-danger btn-sm  d-none" id="btnCancel">Cancel</button>
 
                 </div>
                 <!-- Footer -->
                 <hr>
-                <footer>WebDev &copy; 2019</footer>
+                <footer>WebDev Studios &copy; 2019</footer>
             </div>
         </div>
     </div>

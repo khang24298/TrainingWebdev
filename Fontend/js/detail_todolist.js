@@ -19,31 +19,44 @@ function doneEvent(todo) {
 }
 
 function appendContent(data, title, listId) {
+    if(data.length <= 0) {
+        $(".content").append("<p class='text-center'>Không có dữ liệu nào để hiển thị</p>");
+        return;
+    }
     data.map(item => {
-        let content = item.isComplete === false ?
-            `<div class="item border p-2 my-1">
+        let content =
+            `<div class="item border shadow p-2 my-3 rounded">
                 <div class="action clearfix">
                     <div class="title float-left">
-                        <a href="./detail_todo.html?id=${item.id}&listTitle=${title}">${item.title}</a>
+                        <a href="./detail_todo.html?id=${item.id}&listTitle=${title}" class="nav-link">
+                            ${ item.isComplete === true 
+                                ?`<del>${item.title}</del>`
+                                :item.title
+                            }
+                        </a>
                     </div>
-                    <a href="#" data-id="${item.id}" class="btn btn-outline-danger btn-sm float-right btn-delete ml-2">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a href="#" id="item_${item.id}" class="btn btn-outline-success btn-sm float-right btn-done">
-                        <i class="fas fa-check"></i>
-                    </a>
+                    <div class="dropdown  float-right" style="margin: 10px;">
+                        <spanid="dropdownMenuButton"
+                            style="cursor: pointer;" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false">
+                             <i class="fas fa-ellipsis-v"></i>
+                        </span>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                            <a href="#" data-id="${item.id}" class="dropdown-item btn-delete">
+                                Xóa
+                            </a>
+                            ${item.isComplete === true 
+                                ?''
+                                :` <a href="#" id="item_${item.id}" class="dropdown-item btn-done">
+                                    Đánh dấu đã xong
+                                </a>`
+                            }                           
+                        </div>
+                    </div>                   
                 </div>
-            </div>` :
-            `<div class="item border p-2 my-1">
-                <div class="action clearfix">
-                    <div class="title float-left">
-                        <a href="./detail_todo.html?id=${item.id}&listTitle=${title}"><del>${item.title}</del></a>
-                    </div>
-                    <a href="#" data-id="${item.id}" class="btn btn-outline-danger btn-sm float-right btn-delete ml-2">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                </div>
-            </div>`
+            </div>`;
 
         $(".content").append(content);
 
@@ -54,7 +67,7 @@ function appendContent(data, title, listId) {
     });
 }
 
-function ajax(data, isCreate = true) {
+function callAjax(data, isCreate = true) {
     let url = "http://todolist.api.webdevuit.com/todos";
     let type = "POST";
 
@@ -94,7 +107,7 @@ function setEventSubmitEditOrCreateForm(oldData = null) {
                     isComplete: false,
                     todoListId: parseInt(todoListId)
                 }
-                ajax(data);
+                callAjax(data);
 
             } else {
                 // Edit 
@@ -109,6 +122,7 @@ function setEventShowCreateForm(todoListId) {
     $("#btnCreate").on("click", function (e) {
         e.preventDefault();
 
+        $('.modal-title').html('Thêm mới');
         $("#txtTitle").val("");
         $("#txtDesc").val("");
         $("#txtTodoListId").val(todoListId);
