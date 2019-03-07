@@ -25,12 +25,12 @@ function appendContent(data, title, listId) {
     }
     data.map(item => {
         let content =
-            `<div class="item border shadow p-2 my-3 rounded">
+            `<div class="item border ${item.isComplete == true? '':'shadow'} p-2 my-3 rounded">
                 <div class="action clearfix">
                     <div class="title float-left">
                         <a href="./detail_todo.html?id=${item.id}&listTitle=${title}" class="nav-link">
                             ${ item.isComplete === true 
-                                ?`<del>${item.title}</del>`
+                                ?`<del class='text-secondary'>${item.title}</del>`
                                 :item.title
                             }
                         </a>
